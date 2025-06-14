@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Produkte</title>
+</h:head>
+
+<h:body>
+    <h1>Produktübersicht</h1>
+
+    <h:form>
+        <h:outputLabel value="Produktsuche:" for="suche" />
+        <h:inputText id="suche" value="#{produktKundeBean.suchbegriff}" />
+        <h:commandButton value="Suchen" action="#{produktKundeBean.suchen}" />
+    </h:form>
+
+    <br/>
+
+    <h:form>
+        <h:dataTable value="#{produktKundeBean.produkte}" var="produkt" border="1">
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{produkt.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Beschreibung</f:facet>
+                #{produkt.beschreibung}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Preis</f:facet>
+                #{produkt.preis} €
+            </h:column>
+            <h:column>
+                <f:facet name="header">Bestand</f:facet>
+                #{produkt.bestand}
+            </h:column>
+            <h:column>
+                <!-- ruft jetzt bestellenMe auf statt bestellen -->
+                <h:commandButton value="Bestellen"
+                                 action="#{produktKundeBean.bestellenMe(produkt)}" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <br />
+    <h:form>
+        <h:commandButton value="Zurück zur Startseite"
+                         action="landing.xhtml?faces-redirect=true" />
+    </h:form>
+
+    <h:messages globalOnly="true" />
+</h:body>
+</html>

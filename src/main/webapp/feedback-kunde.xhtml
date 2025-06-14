@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  
+  <h:head>
+    <title>Feedback zur Bestellung</title>
+  </h:head>
+
+  <h:body>
+    <f:metadata>
+      <!-- liest den URL-Parameter “bestellnummer” und speichert ihn als Long in der Bean -->
+      <f:viewParam name="bestellnummer"
+                   value="#{feedbackKundeBean.bestellnummer}" />
+    </f:metadata>
+
+    <h1>Feedback zur Bestellung #{feedbackKundeBean.bestellnummer}</h1>
+
+    <h:form>
+      <h:outputLabel for="text" 
+                     value="Ihr Feedback:" />
+      <br/>
+      <h:inputTextarea id="text" 
+                       value="#{feedbackKundeBean.text}" 
+                       rows="5" cols="60" />
+      <br/><br/>
+      <h:commandButton value="Absenden" 
+                       action="#{feedbackKundeBean.submit}" />
+    </h:form>
+
+    <h:messages globalOnly="true" />
+  </h:body>
+</html>

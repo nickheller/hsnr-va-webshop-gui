@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Produkt bearbeiten</title>
+</h:head>
+
+<h:body>
+    <h1>Produkt bearbeiten</h1>
+
+    <h:form>
+        <h:panelGrid columns="2" cellpadding="5">
+
+            <h:outputLabel for="nummer" value="Produktnummer:" />
+            <h:outputText id="nummer" value="#{produktBean.bearbeitetesProdukt.produktnummer}" />
+
+            <h:outputLabel for="name" value="Name:" />
+            <h:inputText id="name" value="#{produktBean.bearbeitetesProdukt.name}" />
+
+            <h:outputLabel for="beschreibung" value="Beschreibung:" />
+            <h:inputTextarea id="beschreibung" value="#{produktBean.bearbeitetesProdukt.beschreibung}" rows="3" cols="30" />
+
+            <h:outputLabel for="preis" value="Preis:" />
+            <h:inputText id="preis" value="#{produktBean.bearbeitetesProdukt.preis}" />
+
+            <h:outputLabel for="kategorie" value="Kategorie:" />
+            <h:inputText id="kategorie" value="#{produktBean.bearbeitetesProdukt.kategorie}" />
+
+            <h:outputLabel for="bestand" value="Bestand:" />
+            <h:inputText id="bestand" value="#{produktBean.bearbeitetesProdukt.bestand}" />
+
+            <h:outputLabel for="lieferzeit" value="Lieferzeit:" />
+            <h:inputText id="lieferzeit" value="#{produktBean.bearbeitetesProdukt.lieferzeit}" />
+        </h:panelGrid>
+
+        <h:commandButton value="Änderungen speichern" action="#{produktBean.aktualisieren}" />
+    </h:form>
+
+    <br/>
+
+    <h:form>
+        <h:commandButton value="Zurück zur Produktübersicht" action="produkte.xhtml?faces-redirect=true" />
+    </h:form>
+</h:body>
+</html>

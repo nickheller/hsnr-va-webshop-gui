@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Profil bearbeiten</title>
+</h:head>
+
+<h:body>
+    <h1>Mein Profil</h1>
+
+    <h:form>
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="vorname" value="Vorname:" />
+            <h:inputText id="vorname" value="#{kundeBean.kunde.vorname}" />
+
+            <h:outputLabel for="nachname" value="Nachname:" />
+            <h:inputText id="nachname" value="#{kundeBean.kunde.nachname}" />
+
+            <h:outputLabel for="email" value="E-Mail:" />
+            <h:inputText id="email" value="#{kundeBean.kunde.email}" />
+
+            <h:outputLabel for="telefon" value="Telefonnummer:" />
+            <h:inputText id="telefon" value="#{kundeBean.kunde.telefonnummer}" />
+
+            <h:outputLabel for="adresse" value="Adresse:" />
+            <h:inputText id="adresse" value="#{kundeBean.kunde.adresse}" />
+        </h:panelGrid>
+
+        <br />
+        <h:commandButton value="Änderungen speichern" action="#{kundeBean.speichern}" />
+
+        <br/><br/>
+        <h:messages globalOnly="true" />
+    </h:form>
+
+    <br />
+
+    <h:form>
+        <h:commandButton value="Zurück zur Startseite" action="landing.xhtml?faces-redirect=true" />
+    </h:form>
+</h:body>
+</html>

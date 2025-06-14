@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Produkte verwalten</title>
+</h:head>
+
+<h:body>
+    <h1>Produkte verwalten</h1>
+
+    <!-- Formular zum Anlegen eines neuen Produkts -->
+    <h:form>
+        <h3>Neues Produkt anlegen</h3>
+        <h:panelGrid columns="2" cellpadding="5">
+
+            <h:outputLabel for="name" value="Name:" />
+            <h:inputText id="name" value="#{produktBean.neuesProdukt.name}" />
+
+            <h:outputLabel for="beschreibung" value="Beschreibung:" />
+            <h:inputTextarea id="beschreibung" value="#{produktBean.neuesProdukt.beschreibung}" rows="3" cols="30" />
+
+            <h:outputLabel for="preis" value="Preis:" />
+            <h:inputText id="preis" value="#{produktBean.neuesProdukt.preis}" />
+
+            <h:outputLabel for="kategorie" value="Kategorie:" />
+            <h:inputText id="kategorie" value="#{produktBean.neuesProdukt.kategorie}" />
+
+            <h:outputLabel for="bestand" value="Bestand:" />
+            <h:inputText id="bestand" value="#{produktBean.neuesProdukt.bestand}" />
+
+            <h:outputLabel for="lieferzeit" value="Lieferzeit:" />
+            <h:inputText id="lieferzeit" value="#{produktBean.neuesProdukt.lieferzeit}" />
+        </h:panelGrid>
+
+        <h:commandButton value="Produkt anlegen" action="#{produktBean.produktSpeichern}" />
+    </h:form>
+
+    <br/>
+
+    <!-- Tabelle mit bestehenden Produkten -->
+    <h:dataTable value="#{produktBean.produktListe}" var="produkt" border="1">
+        <h:column>
+            <f:facet name="header">Nummer</f:facet>
+            #{produkt.produktnummer}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            #{produkt.name}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Beschreibung</f:facet>
+            #{produkt.beschreibung}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Preis</f:facet>
+            #{produkt.preis} €
+        </h:column>
+        <h:column>
+            <f:facet name="header">Kategorie</f:facet>
+            #{produkt.kategorie}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Bestand</f:facet>
+            #{produkt.bestand}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Lieferzeit</f:facet>
+            #{produkt.lieferzeit}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Aktionen</f:facet>
+            <h:form>
+                <h:commandButton value="Bearbeiten" action="#{produktBean.bearbeiten(produkt)}" />
+                <h:commandButton value="Löschen"
+                                 action="#{produktBean.loeschen(produkt)}"
+                                 rendered="#{produkt.bestand == 0}" />
+            </h:form>
+        </h:column>
+    </h:dataTable>
+
+    <br/>
+
+    <!-- Filter Buttons unter der Tabelle -->
+    <h:form>
+        <h:commandButton value="Alle Produkte anzeigen" action="#{produktBean.ladeAlleProdukte}" />
+        <h:commandButton value="Nur verfügbare Produkte anzeigen" action="#{produktBean.ladeVerfuegbareProdukte}" />
+    </h:form>
+
+    <br/>
+
+    <!-- Zurück zur Startseite -->
+    <h:form>
+        <h:commandButton value="Zurück zur Startseite" action="landing.xhtml?faces-redirect=true" />
+    </h:form>
+</h:body>
+</html>

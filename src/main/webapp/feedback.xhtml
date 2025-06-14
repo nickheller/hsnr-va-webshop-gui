@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Kundenfeedback einsehen</title>
+</h:head>
+
+<h:body>
+    <h1>Kundenfeedback einsehen</h1>
+
+    <!-- Feedbacktabelle -->
+    <h:dataTable value="#{feedbackBean.feedbackListe}" var="feedback" border="1">
+        <h:column>
+            <f:facet name="header">Feedback ID</f:facet>
+            #{feedback.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Bestellnummer</f:facet>
+            #{feedback.bestellnummer}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Text</f:facet>
+            #{feedback.text}
+        </h:column>
+    </h:dataTable>
+
+    <br/>
+
+    <!-- Zurück zur Startseite -->
+    <h:form>
+        <h:commandButton value="Zurück zur Startseite" action="landing.xhtml?faces-redirect=true" />
+    </h:form>
+</h:body>
+</html>

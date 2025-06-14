@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+
+<h:head>
+    <title>Webshop Landing Page</title>
+</h:head>
+
+<h:body>
+    <h1>Willkommen, #{loginBean.aktuellerBenutzer.name}!</h1>
+    <h:outputText value="Rolle: #{loginBean.aktuellerBenutzer.rolle}" />
+
+    <!-- Admin-Menü -->
+    <h:panelGroup rendered="#{not empty loginBean.aktuellerBenutzer and loginBean.aktuellerBenutzer.rolle eq 'admin'}">
+        <h2>Admin-Funktionen</h2>
+        <ul>
+            <li><h:link value="Benutzerverwaltung" outcome="nutzer.xhtml" /></li>
+        </ul>
+    </h:panelGroup>
+
+    <!-- Mitarbeiter-Menü -->
+    <h:panelGroup rendered="#{not empty loginBean.aktuellerBenutzer and loginBean.aktuellerBenutzer.rolle eq 'mitarbeiter'}">
+        <h2>Mitarbeiter-Funktionen</h2>
+        <ul>
+            <li><h:link value="Produkte verwalten" outcome="produkte.xhtml" /></li>
+            <li><h:link value="Bestellungen verwalten" outcome="bestellungen.xhtml" /></li>
+            <li><h:link value="Kundenfeedback einsehen" outcome="feedback.xhtml" /></li>
+        </ul>
+    </h:panelGroup>
+
+    <!-- Kunden-Menü -->
+    <h:panelGroup rendered="#{not empty loginBean.aktuellerBenutzer and loginBean.aktuellerBenutzer.rolle eq 'kunde'}">
+        <h2>Kunden-Funktionen</h2>
+        <ul>
+            <li><h:link value="Meine Daten verwalten" outcome="profil.xhtml" /></li>
+            <li><h:link value="Produktübersicht und Bestellen" outcome="produkte-kunde.xhtml" /></li>
+            <li><h:link value="Bestellungen" outcome="bestellHistorie.xhtml" /></li>
+        </ul>
+    </h:panelGroup>
+
+    <br/>
+    <h:form>
+        <h:commandButton value="Logout" action="#{loginBean.logout}" />
+    </h:form>
+</h:body>
+</html>
