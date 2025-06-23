@@ -27,9 +27,7 @@ public class BestellHistorieBean implements Serializable {
 
     private List<BestellungDTO> bestellungen;
 
-    @Inject
-    private LoginBean loginBean;
-
+    @Inject private LoginBean loginBean;
     private ObjectMapper mapper;
 
     @PostConstruct
@@ -40,11 +38,11 @@ public class BestellHistorieBean implements Serializable {
         ladeHistorie();
     }
 
+    /** Holt alle Bestellungen des aktuellen Nutzers über /api/bestellungen/me */
     public void ladeHistorie() {
         try {
-            // Nutzt den neuen /api/bestellungen/me Endpunkt
             String urlStr = "http://localhost:8080/webshop/api/bestellungen/me";
-            HttpURLConnection con = (HttpURLConnection) new URL(urlStr).openConnection();
+            HttpURLConnection con = (HttpURLConnection)new URL(urlStr).openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("Authorization", "Basic " + encodeCreds());
             con.setRequestProperty("Accept", "application/json");
@@ -53,8 +51,7 @@ public class BestellHistorieBean implements Serializable {
             if (status == 200) {
                 bestellungen = mapper.readValue(
                     con.getInputStream(),
-                    new TypeReference<List<BestellungDTO>>() {}
-                );
+                    new TypeReference<List<BestellungDTO>>() {});
             } else {
                 FacesContext.getCurrentInstance().addMessage(
                     null,
@@ -70,12 +67,42 @@ public class BestellHistorieBean implements Serializable {
         }
     }
 
-    public List<BestellungDTO> getBestellungen() {
-        return bestellungen;
-    }
-
+    /** Wrapper für Neuladen aus dem View */
     public void reload() {
         ladeHistorie();
+    }
+
+    /** Storniert eine einzelne Bestellung und lädt die Liste neu */
+    public void stornieren(Long bestellnummer) {
+        try {
+            String urlStr = "http://localhost:8080/webshop/api/bestellungen/stornieren/" + bestellnummer;
+            HttpURLConnection con = (HttpURLConnection)new URL(urlStr).openConnection();
+            con.setRequestMethod("PUT");
+            con.setRequestProperty("Authorization", "Basic " + encodeCreds());
+            int status = con.getResponseCode();
+            if (status == 204 || status == 200) {
+                FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage("Bestellung " + bestellnummer + " wurde storniert.")
+                );
+                ladeHistorie();
+            } else {
+                FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage("Fehler beim Stornieren (Status: " + status + ")")
+                );
+                logError(con);
+            }
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(
+                null,
+                new FacesMessage("Fehler beim Stornieren: " + e.getMessage())
+            );
+        }
+    }
+
+    public List<BestellungDTO> getBestellungen() {
+        return bestellungen;
     }
 
     // ────────────────────────────────────────────────────────────────────────────

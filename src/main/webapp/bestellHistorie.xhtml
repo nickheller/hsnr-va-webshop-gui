@@ -10,54 +10,71 @@
   <h:body>
     <h1>Meine Bestellhistorie</h1>
 
-    <!-- Button zum Neuladen -->
+    <!-- Neuladen -->
     <h:form>
       <h:commandButton value="Aktualisieren"
-                       action="#{bestellHistorieBean.ladeHistorie}" />
+                       action="#{bestellHistorieBean.reload}" />
     </h:form>
 
     <br/>
 
-    <!-- Tabelle mit Bestellungen -->
+    <!-- Tabelle -->
     <h:form>
       <h:dataTable value="#{bestellHistorieBean.bestellungen}"
-                   var="bestellung"
+                   var="b"
                    border="1">
 
         <h:column>
           <f:facet name="header">Bestellnr.</f:facet>
-          #{bestellung.bestellnummer}
+          #{b.bestellnummer}
         </h:column>
 
         <h:column>
           <f:facet name="header">Datum</f:facet>
-          #{bestellung.bestelldatum}
+          #{b.bestelldatum}
         </h:column>
 
         <h:column>
           <f:facet name="header">Status</f:facet>
-          #{bestellung.status}
+          #{b.status}
         </h:column>
 
         <h:column>
           <f:facet name="header">Lieferadresse</f:facet>
-          #{bestellung.lieferadresse}
+          #{b.lieferadresse}
         </h:column>
 
         <h:column>
           <f:facet name="header">Gesamtpreis</f:facet>
-          #{bestellung.gesamtpreis} €
+          #{b.gesamtpreis} €
         </h:column>
 
         <h:column>
           <f:facet name="header">Feedback</f:facet>
-          <h:link outcome="feedback-kunde.xhtml" value="Feedback">
-            <f:param name="bestellnummer"
-                     value="#{bestellung.bestellnummer}" />
-          </h:link>
+          <h:commandButton value="Feedback"
+                           action="feedback-kunde.xhtml?faces-redirect=true">
+            <f:setPropertyActionListener
+               target="#{feedbackKundeBean.bestellnummer}"
+               value="#{b.bestellnummer}" />
+          </h:commandButton>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">Stornieren</f:facet>
+          <h:commandButton value="Stornieren"
+                           action="#{bestellHistorieBean.stornieren(b.bestellnummer)}"
+                           onclick="return confirm('Wirklich Bestellung #{b.bestellnummer} stornieren?');" />
         </h:column>
 
       </h:dataTable>
+    </h:form>
+
+    <br/>
+
+    <!-- Zurück zur Startseite -->
+    <h:form>
+      <h:commandButton value="Zurück zur Startseite"
+                       action="landing.xhtml?faces-redirect=true" />
     </h:form>
 
     <h:messages globalOnly="true" />
