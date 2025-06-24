@@ -11,7 +11,6 @@
 <h:body>
     <h1>Kundenfeedback einsehen</h1>
 
-    <!-- Feedbacktabelle -->
     <h:dataTable value="#{feedbackBean.feedbackListe}" var="feedback" border="1">
         <h:column>
             <f:facet name="header">Feedback ID</f:facet>
@@ -28,8 +27,6 @@
     </h:dataTable>
 
     <br/>
-
-    <!-- Zurück zur Startseite -->
     <h:form>
         <h:commandButton value="Zurück zur Startseite" action="landing.xhtml?faces-redirect=true" />
     </h:form>

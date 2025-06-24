@@ -1,4 +1,3 @@
-// src/main/java/com/hsnr/webshop/gui/dto/KundeDTO.java
 package com.hsnr.webshop.gui.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

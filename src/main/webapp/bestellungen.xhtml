@@ -12,10 +12,8 @@
 <h:body>
     <h1>Bestellungen verwalten</h1>
 
-    <!-- Meldungen anzeigen -->
     <h:messages globalOnly="true" />
 
-    <!-- Tabelle mit Bestellungen -->
     <h:form>
         <h:dataTable value="#{bestellungBean.bestellungen}" var="bestellung" border="1">
             <h:column>
@@ -63,7 +61,6 @@
 
     <br/>
 
-    <!-- Zurück zur Startseite -->
     <h:form>
         <h:commandButton value="Zurück zur Startseite" action="landing.xhtml?faces-redirect=true" />
     </h:form>

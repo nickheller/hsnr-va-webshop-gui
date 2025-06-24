@@ -7,7 +7,6 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
@@ -22,14 +21,9 @@ public class FeedbackKundeBean implements Serializable {
     @Inject private LoginBean           loginBean;
     @Inject private BestellHistorieBean historieBean;
 
-    private Long   bestellnummer;   // per f:setPropertyActionListener gesetzt
-    private String text;            // via inputTextarea gebunden
+    private Long   bestellnummer;
+    private String text;
 
-    /**
-     * Sendet das Feedback und navigiert zurück zur Bestellhistorie.
-     * 
-     * @return Navigations-Outcome für JSF
-     */
     public String submit() {
         if (bestellnummer == null || text == null || text.isBlank()) {
             showMessage("Bitte Bestellnummer und Feedback-Text angeben.");
@@ -58,12 +52,9 @@ public class FeedbackKundeBean implements Serializable {
             int status = con.getResponseCode();
             if (status == 200 || status == 204) {
                 showMessage("Danke für Ihr Feedback!");
-                // Historie neu laden
                 historieBean.reload();
-                // Formular zurücksetzen
                 bestellnummer = null;
                 text = null;
-                // Zurück zur Historie-Seite
                 return "bestellHistorie.xhtml?faces-redirect=true";
             } else {
                 showMessage("Fehler beim Abschicken (Status: " + status + ")");
@@ -79,8 +70,6 @@ public class FeedbackKundeBean implements Serializable {
         FacesContext.getCurrentInstance()
                     .addMessage(null, new FacesMessage(msg));
     }
-
-    // ─── Getter/Setter ─────────────────────────────
 
     public Long getBestellnummer() {
         return bestellnummer;

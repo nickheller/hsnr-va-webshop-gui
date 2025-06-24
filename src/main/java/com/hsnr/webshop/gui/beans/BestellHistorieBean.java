@@ -11,7 +11,6 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Serializable;
@@ -38,7 +37,6 @@ public class BestellHistorieBean implements Serializable {
         ladeHistorie();
     }
 
-    /** Holt alle Bestellungen des aktuellen Nutzers über /api/bestellungen/me */
     public void ladeHistorie() {
         try {
             String urlStr = "http://localhost:8080/webshop/api/bestellungen/me";
@@ -67,12 +65,10 @@ public class BestellHistorieBean implements Serializable {
         }
     }
 
-    /** Wrapper für Neuladen aus dem View */
     public void reload() {
         ladeHistorie();
     }
 
-    /** Storniert eine einzelne Bestellung und lädt die Liste neu */
     public void stornieren(Long bestellnummer) {
         try {
             String urlStr = "http://localhost:8080/webshop/api/bestellungen/stornieren/" + bestellnummer;
@@ -105,9 +101,7 @@ public class BestellHistorieBean implements Serializable {
         return bestellungen;
     }
 
-    // ────────────────────────────────────────────────────────────────────────────
-    // Hilfsmethoden
-    // ────────────────────────────────────────────────────────────────────────────
+
     private String encodeCreds() {
         String auth = loginBean.getUsername() + ":" + loginBean.getPassword();
         return Base64.getEncoder().encodeToString(auth.getBytes(StandardCharsets.UTF_8));

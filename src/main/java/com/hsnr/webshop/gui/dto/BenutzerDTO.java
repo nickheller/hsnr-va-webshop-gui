@@ -7,9 +7,8 @@ public class BenutzerDTO implements Serializable {
     private String name;
     private String telefonnummer;
     private String rolle;
-    private String passwort; // ➕ hinzufügen
+    private String passwort;
 
-    // Getter & Setter
     public String getBenutzerkennung() {
         return benutzerkennung;
     }

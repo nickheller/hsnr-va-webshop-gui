@@ -13,7 +13,6 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -74,13 +73,8 @@ public class ProduktKundeBean implements Serializable {
         );
     }
 
-    /**
-     * Neue Variante: Bestellung für den aktuell eingeloggten Kunden,
-     * ohne Kundennummer im JSON–Payload (nutzt /bestellungen/me).
-     */
     public void bestellenMe(ProduktDTO produkt) {
         try {
-            // Kundendaten laden, um Adresse/Zahlungsmethode zu holen
             var kd = kundeBean.getKunde();
             if (kd == null) {
                 kundeBean.ladeKundendaten();
@@ -91,7 +85,6 @@ public class ProduktKundeBean implements Serializable {
                 return;
             }
 
-            // Request-DTO OHNE kundennummer
             BestellpositionDTO pos = new BestellpositionDTO();
             pos.setProduktnummer(produkt.getProduktnummer());
             pos.setMenge(1);
@@ -101,7 +94,6 @@ public class ProduktKundeBean implements Serializable {
             req.setZahlungsmethode(kd.getZahlungsmethode());
             req.setPositionen(List.of(pos));
 
-            // POST /api/bestellungen/me
             HttpURLConnection con = (HttpURLConnection)
                 new URL("http://localhost:8080/webshop/api/bestellungen/me")
                 .openConnection();
@@ -118,7 +110,7 @@ public class ProduktKundeBean implements Serializable {
             int status = con.getResponseCode();
             if (status < 300) {
                 showMessage("Produkt erfolgreich bestellt!");
-                loadAll();  // Bestand aktualisieren
+                loadAll();
             } else {
                 logError(con);
                 showMessage("Fehler beim Bestellen (Status: " + status + ")");
@@ -128,7 +120,6 @@ public class ProduktKundeBean implements Serializable {
         }
     }
 
-    // ─── Hilfsmethoden ──────────────────────────
     private HttpURLConnection openGet(String urlStr) throws Exception {
         var con = (HttpURLConnection)new URL(urlStr).openConnection();
         con.setRequestMethod("GET");
@@ -154,7 +145,6 @@ public class ProduktKundeBean implements Serializable {
         } catch (Exception ignored) {}
     }
 
-    // ─── Getter/Setter ─────────────────────────
     public List<ProduktDTO> getProdukte()       { return produkte; }
     public String getSuchbegriff()              { return suchbegriff; }
     public void setSuchbegriff(String s)        { this.suchbegriff = s; }

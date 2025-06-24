@@ -9,7 +9,6 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
@@ -166,7 +165,6 @@ public class BenutzerBean implements Serializable {
         conn.setRequestMethod(method);
     }
 
-    // Getter & Setter
     public List<BenutzerDTO> getBenutzerListe() {
         return benutzerListe;
     }

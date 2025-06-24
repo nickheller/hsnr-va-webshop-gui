@@ -9,7 +9,6 @@ public class BestellungsRequestDTO implements Serializable {
     private String zahlungsmethode;
     private List<BestellpositionDTO> positionen;
 
-    // Getter & Setter
     public Long getKundennummer() {
         return kundennummer;
     }

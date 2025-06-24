@@ -11,7 +11,6 @@
 <h:body>
     <h1>Produkte verwalten</h1>
 
-    <!-- Formular zum Anlegen eines neuen Produkts -->
     <h:form>
         <h3>Neues Produkt anlegen</h3>
         <h:panelGrid columns="2" cellpadding="5">
@@ -40,7 +39,6 @@
 
     <br/>
 
-    <!-- Tabelle mit bestehenden Produkten -->
     <h:dataTable value="#{produktBean.produktListe}" var="produkt" border="1">
         <h:column>
             <f:facet name="header">Nummer</f:facet>
@@ -83,7 +81,6 @@
 
     <br/>
 
-    <!-- Filter Buttons unter der Tabelle -->
     <h:form>
         <h:commandButton value="Alle Produkte anzeigen" action="#{produktBean.ladeAlleProdukte}" />
         <h:commandButton value="Nur verfügbare Produkte anzeigen" action="#{produktBean.ladeVerfuegbareProdukte}" />
@@ -91,7 +88,6 @@
 
     <br/>
 
-    <!-- Zurück zur Startseite -->
     <h:form>
         <h:commandButton value="Zurück zur Startseite" action="landing.xhtml?faces-redirect=true" />
     </h:form>

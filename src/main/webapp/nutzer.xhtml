@@ -11,7 +11,6 @@
 <h:body>
     <h1>Benutzerübersicht</h1>
 
-    <!-- Formular zum Anlegen neuer Benutzer -->
     <h:form>
         <h3>Neuen Benutzer anlegen</h3>
         <h:panelGrid columns="2" cellpadding="5">
@@ -40,7 +39,6 @@
 
     <br/>
 
-    <!-- Tabelle mit vorhandenen Benutzern -->
     <h:dataTable value="#{benutzerBean.benutzerListe}" var="benutzer" border="1">
         <h:column>
             <f:facet name="header">Benutzerkennung</f:facet>
@@ -71,7 +69,6 @@
 
     <br/>
 
-    <!-- Zurück zur Landing Page -->
     <h:form>
         <h:commandButton value="Zurück zur Startseite" action="landing.xhtml?faces-redirect=true" />
     </h:form>

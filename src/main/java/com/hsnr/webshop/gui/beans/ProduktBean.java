@@ -9,7 +9,6 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
@@ -93,8 +92,8 @@ public class ProduktBean implements Serializable {
             if (code == 200 || code == 201 || code == 204) {
                 FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Produkt gespeichert"));
-                ladeAlleProdukte(); // Tabelle aktualisieren
-                neuesProdukt = new ProduktDTO(); // Formular leeren
+                ladeAlleProdukte();
+                neuesProdukt = new ProduktDTO();
             } else {
                 FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler", "Fehlercode: " + code));
@@ -148,7 +147,7 @@ public class ProduktBean implements Serializable {
             e.printStackTrace();
         }
 
-    return null; // bleibt auf der Seite, wenn Fehler auftritt
+    return null;
 }
 
     public void loeschen(ProduktDTO produkt) {
@@ -172,7 +171,6 @@ public class ProduktBean implements Serializable {
         }
     }
 
-    // Getter & Setter
     public List<ProduktDTO> getProduktListe() {
         return produktListe;
     }

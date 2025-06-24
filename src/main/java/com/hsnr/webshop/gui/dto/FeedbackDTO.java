@@ -1,4 +1,3 @@
-// src/main/java/com/hsnr/webshop/gui/dto/FeedbackDTO.java
 package com.hsnr.webshop.gui.dto;
 
 import java.io.Serializable;

@@ -11,10 +11,8 @@ public class ProduktDTO implements Serializable {
     private Integer bestand;
     private String lieferzeit;
 
-    // Standard-Konstruktor
     public ProduktDTO() {}
 
-    // Konstruktor mit allen Feldern
     public ProduktDTO(Long produktnummer, String name, String beschreibung, Double preis,
                       String kategorie, Integer bestand, String lieferzeit) {
         this.produktnummer = produktnummer;
@@ -26,7 +24,6 @@ public class ProduktDTO implements Serializable {
         this.lieferzeit = lieferzeit;
     }
 
-    // Getter & Setter
     public Long getProduktnummer() {
         return produktnummer;
     }

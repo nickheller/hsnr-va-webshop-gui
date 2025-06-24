@@ -9,7 +9,6 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -42,8 +41,7 @@ public class BestellungBean implements Serializable {
 
     public void ladeAlleBestellungen() {
         try {
-            // Workaround: Alle Bestellungen für alle Kunden anzeigen → Admin-/Mitarbeiterrolle vorausgesetzt
-            URL url = new URL("http://localhost:8080/webshop/api/bestellungen/kunde/1"); // ggf. dynamisch anpassen
+            URL url = new URL("http://localhost:8080/webshop/api/bestellungen/kunde/1");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             setAuthHeader(conn, "GET");
 
@@ -82,7 +80,6 @@ public class BestellungBean implements Serializable {
         }
     }
 
-    // Getter
     public List<BestellungDTO> getBestellungen() {
         return bestellungen;
     }

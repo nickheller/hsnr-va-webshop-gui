@@ -11,7 +11,6 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -35,11 +34,9 @@ public class KundeBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        // Einmalige Konfiguration des ObjectMappers
         mapper = new ObjectMapper()
             .registerModule(new JavaTimeModule())
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-            // ignoriert unbekannte Felder (wie 'benutzer')
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         ladeKundendaten();
     }

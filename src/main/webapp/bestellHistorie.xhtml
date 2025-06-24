@@ -10,7 +10,6 @@
   <h:body>
     <h1>Meine Bestellhistorie</h1>
 
-    <!-- Neuladen -->
     <h:form>
       <h:commandButton value="Aktualisieren"
                        action="#{bestellHistorieBean.reload}" />
@@ -18,7 +17,6 @@
 
     <br/>
 
-    <!-- Tabelle -->
     <h:form>
       <h:dataTable value="#{bestellHistorieBean.bestellungen}"
                    var="b"
@@ -71,7 +69,6 @@
 
     <br/>
 
-    <!-- Zurück zur Startseite -->
     <h:form>
       <h:commandButton value="Zurück zur Startseite"
                        action="landing.xhtml?faces-redirect=true" />
